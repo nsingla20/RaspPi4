@@ -1,10 +1,9 @@
 #!/bin/bash
-gpio -g mode 2 out
+gpio -g mode $LED_PIHOLE out
 tail -f /var/log/pihole.log | while read INPUT
 do
-	gpio -g mode 2 out
-	gpio -g write 2 1
+	gpio -g write $LED_PIHOLE 1
 	sleep 0.01
-	gpio -g write 2 0
+	gpio -g write $LED_PIHOLE 0
 	sleep 0.01
 done

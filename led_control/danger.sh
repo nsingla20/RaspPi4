@@ -1,5 +1,5 @@
 #!/bin/bash
-gpio -g mode 4 out
+gpio -g mode $LED_DANGER out
 while true
 do
 	temp=`vcgencmd measure_temp | egrep -o '[0-9]*\.[0-9]*'|awk '{printf "%d",$1}'`
@@ -9,10 +9,10 @@ do
 	echo "temp:$temp cpu:$cpu ram:$ram disk:$disk"
 	if [[ $temp -ge 60 ||  $cpu -ge 3 || $ram -ge 1000 || disk -ge 40 ]]
 	then
-		gpio -g write 4 1
+		gpio -g write $LED_DANGER 1
 		sleep 300
 	else
-		gpio -g write 4 0
+		gpio -g write $LED_DANGER 0
 	fi
 	sleep 3
 done
